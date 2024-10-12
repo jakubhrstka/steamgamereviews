@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryProvider } from "@/components/query-provider";
-import Link from "next/link";
+import { Header } from "./header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,11 +33,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900 text-slate-200`}
       >
         <QueryProvider>
-          <header className="px-4 py-4 text-center">
-            <Link href="/" className="text-xl slate-300 font-bold">
-              REVIEWS
-            </Link>
-          </header>
+          <Header />
+
           {children}
         </QueryProvider>
 
