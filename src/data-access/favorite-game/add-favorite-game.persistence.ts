@@ -13,7 +13,7 @@ export async function addFavoriteGame(game: AddFavoriteGameDto) {
         user: { connect: { id: game.userId } },
       },
     });
-  } catch (error) {
+  } catch {
     throw new Error("Failed to add new favorite game");
   }
 }
