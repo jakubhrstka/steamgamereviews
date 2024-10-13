@@ -1,12 +1,12 @@
 import { ZodError, z } from "zod";
 
-type ValidatedFields = "userId" | "appId";
+type ValidatedFields = "userId" | "appId" | "name" | "id";
 
 export class FavoriteGameEntityValidationError extends Error {
   private errors: Record<ValidatedFields, string | undefined>;
 
   constructor(errors: Record<ValidatedFields, string | undefined>) {
-    super("An error occured validating an item entity");
+    super("An error occured validating an favorite game entity");
     this.errors = errors;
   }
 
@@ -18,8 +18,8 @@ export class FavoriteGameEntityValidationError extends Error {
 export class FavoriteGameEntity {
   private id?: number;
   private name?: string;
-  private appId: number;
   private userId: string;
+  private appId: number;
 
   constructor({
     id,
@@ -57,19 +57,23 @@ export class FavoriteGameEntity {
   }
 
   private validate() {
-    const itemSchema = z.object({
+    const favoriteGameSchema = z.object({
       userId: z.string().min(1),
-      appid: z.number().min(0),
+      appId: z.number().min(0),
+      name: z.string().optional(),
+      id: z.number().optional(),
     });
 
     try {
-      itemSchema.parse(this);
+      favoriteGameSchema.parse(this);
     } catch (err) {
       const error = err as ZodError;
       const errors = error.flatten().fieldErrors;
       throw new FavoriteGameEntityValidationError({
         userId: errors.userId?.[0],
         appId: errors.appid?.[0],
+        name: errors.name?.[0],
+        id: errors.id?.[0],
       });
     }
   }

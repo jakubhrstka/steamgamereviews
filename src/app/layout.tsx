@@ -17,9 +17,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Steam Game Review Search",
+  title: "Review Search",
   description:
-    "Search for reviews of your favorite Steam games from real users that have some significant playtime.",
+    "Search for reviews of your favorite Steam games from real users that have some significant playtime or save the games for later.",
 };
 
 export default function RootLayout({

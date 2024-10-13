@@ -1,6 +1,6 @@
 "use client";
 
-import { removeFavoriteGameAction } from "./_actions/remove-favorite-game";
+import { removeFavoriteGameAction } from "../_actions/remove-favorite-game";
 import { X } from "lucide-react";
 
 export default function AddToFavoritesButton({ id }: { id: number }) {

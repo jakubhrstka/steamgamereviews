@@ -13,7 +13,7 @@ export async function searchGamesUseCase(
 ): Promise<SearchResultsDto> {
   if (!data.query) return { items: [] };
 
-  const searchResults: SearchResultsDto = await context.searchGames(data.query);
+  const searchResults = await context.searchGames(data.query);
 
   return searchResults;
 }

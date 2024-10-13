@@ -1,3 +1,6 @@
+import { Session } from "next-auth";
+import { AuthenticationError } from "../utils";
+
 export type FavoriteGamesDto = {
   items: {
     id: number;
@@ -7,9 +10,14 @@ export type FavoriteGamesDto = {
 };
 
 export async function getFavoriteGamesUseCase(context: {
-  getFavoriteGames: () => Promise<FavoriteGamesDto>;
+  getFavoriteGames: (userId: string) => Promise<FavoriteGamesDto>;
+  getUserSession: () => Promise<Session | null>;
 }): Promise<FavoriteGamesDto> {
-  const favoriteGames: FavoriteGamesDto = await context.getFavoriteGames();
+  const session = await context.getUserSession();
+
+  if (!session?.user?.id) throw new AuthenticationError();
+
+  const favoriteGames = await context.getFavoriteGames(session.user.id);
 
   return favoriteGames;
 }

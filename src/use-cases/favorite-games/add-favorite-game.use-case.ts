@@ -1,7 +1,7 @@
 import {
   FavoriteGameEntity,
   FavoriteGameEntityValidationError,
-} from "@/app/entities/favorite-game";
+} from "@/entities/favorite-game";
 import { Session } from "next-auth";
 import { AuthenticationError, ValidationError } from "../utils";
 

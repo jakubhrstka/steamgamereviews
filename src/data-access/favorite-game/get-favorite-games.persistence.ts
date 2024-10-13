@@ -1,7 +1,5 @@
-import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { FavoriteGamesDto } from "@/use-cases/favorite-games/get-favorite-games.use-case";
-import { AuthenticationError } from "@/use-cases/utils";
 import { FavoriteGame } from "@prisma/client";
 
 const toDtoMapper = (games: FavoriteGame[]): FavoriteGamesDto => ({
@@ -12,14 +10,10 @@ const toDtoMapper = (games: FavoriteGame[]): FavoriteGamesDto => ({
   })),
 });
 
-export async function getFavoriteGames() {
-  const session = await auth();
-
+export async function getFavoriteGames(userId: string) {
   try {
-    if (!session?.user) throw new AuthenticationError();
-
     const games = await db.favoriteGame.findMany({
-      where: { userId: session.user.id },
+      where: { userId: userId },
     });
 
     return toDtoMapper(games);

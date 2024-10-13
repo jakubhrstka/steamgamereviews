@@ -2,7 +2,13 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getFavoriteGamesAction } from "./_actions/get-favorite-games";
 import Link from "next/link";
-import RemoveFavoriteButton from "./remove-favorite-button";
+import RemoveFavoriteButton from "./_components/remove-favorite-button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Review Search | Favorites",
+  description: "List of all your games marked as favorite.",
+};
 
 export default async function FavoritesPage() {
   const session = await auth();

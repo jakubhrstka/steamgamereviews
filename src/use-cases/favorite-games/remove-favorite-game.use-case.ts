@@ -1,9 +1,6 @@
-import {
-  FavoriteGameEntity,
-  FavoriteGameEntityValidationError,
-} from "@/app/entities/favorite-game";
+import { FavoriteGameEntity } from "@/entities/favorite-game";
 import { Session } from "next-auth";
-import { AuthenticationError, ValidationError } from "../utils";
+import { AuthenticationError } from "../utils";
 
 export type AddFavoriteGameDto = {
   appId: number;

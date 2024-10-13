@@ -9,15 +9,17 @@ export type ReviewsDto = {
 export async function getReviewsUseCase(
   context: { getReviews: (appId: string) => Promise<ReviewsDto> },
   data: {
-    appId: string | null;
+    appId: string;
   }
 ): Promise<ReviewsDto> {
   if (!data.appId) return { items: [] };
 
-  const reviews: ReviewsDto = await context.getReviews(data.appId);
+  const reviews = await context.getReviews(data.appId);
 
+  // remove the first 3 reviews from the list
   const topReviews = reviews.items.splice(0, 3);
 
+  // iterate through the reviews and find the top 3 reviews and sort them by playtime
   reviews.items.forEach((review) => {
     const playtime = review.playtimeForever;
 

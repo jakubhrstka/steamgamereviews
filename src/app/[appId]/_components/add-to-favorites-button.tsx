@@ -1,6 +1,6 @@
 "use client";
 
-import { addFavoriteGameAction } from "./_actions/add-favorite-game";
+import { addFavoriteGameAction } from "../_actions/add-favorite-game";
 
 export default function AddToFavoritesButton({ appId }: { appId: number }) {
   const handleAdd = async () => {
