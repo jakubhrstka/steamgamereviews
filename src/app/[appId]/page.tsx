@@ -3,6 +3,7 @@ import { getReviewsAction } from "./_actions/get-reviews";
 import AddToFavoritesButton from "./_components/add-to-favorites-button";
 import { Metadata } from "next";
 import { getFavoriteGamesAction } from "../favorites/_actions/get-favorite-games";
+import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Review Search | Game Detail",
@@ -14,12 +15,13 @@ export default async function GameDetail({
 }: {
   params: { appId: string };
 }) {
+  const session = await auth();
   const reviews = await getReviewsAction(appId);
-  const favorites = await getFavoriteGamesAction();
+  const favorites = session?.user ? await getFavoriteGamesAction() : null;
 
-  const isAlreadyInFavorites = favorites.items.some(
-    (favorite) => favorite.appId === appId
-  );
+  const isAlreadyInFavorites = favorites
+    ? favorites.items.some((favorite) => favorite.appId === appId)
+    : false;
 
   const isAnyReviewWithZeroPlaytime = reviews.items.some(
     (review) => review.playtimeForever === 0
@@ -49,7 +51,7 @@ export default async function GameDetail({
         </p>
       ) : null}
 
-      {!isAlreadyInFavorites ? (
+      {session?.user && !isAlreadyInFavorites ? (
         <AddToFavoritesButton appId={Number(appId)} />
       ) : null}
 
