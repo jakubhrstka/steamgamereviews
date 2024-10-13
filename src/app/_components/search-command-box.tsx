@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Input } from "@/components/ui/input";
 import { LoaderIcon } from "lucide-react";
-import { searchAction } from "./_actions/search-action";
+import { searchAction } from "../_actions/search-action";
 import Link from "next/link";
 
 export function SearchCommandBox() {
@@ -49,10 +49,15 @@ export function SearchCommandBox() {
         ) : null}
       </div>
       {data?.items && data.items.length > 0 ? (
-        <ul className="flex flex-col gap-1 text-slate-300 text-sm">
+        <ul className="flex flex-col gap-1 text-sm">
           {data.items.map((item) => (
             <li key={item.name} className="">
-              <Link href={`/${item.id}`}>{item.name}</Link>
+              <Link
+                href={`/${item.id}`}
+                className="text-slate-200 hover:text-slate-500"
+              >
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>

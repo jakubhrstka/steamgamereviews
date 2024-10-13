@@ -1,5 +1,5 @@
 import { SearchResultsDto } from "@/use-cases/search/search-games.use-case";
-import { STEAM_API_BASE_URL } from "./utils";
+import { STEAM_API_BASE_URL } from "../utils";
 import { redis } from "@/lib/redis";
 import { cookies } from "next/headers";
 import { createRateLimiter, handleRateLimitError } from "@/lib/rate-limit";

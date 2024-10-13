@@ -1,5 +1,5 @@
 import { ReviewsDto } from "@/use-cases/reviews/get-reviews.use-case";
-import { STEAM_API_BASE_URL } from "./utils";
+import { STEAM_API_BASE_URL } from "../utils";
 import { redis } from "@/lib/redis";
 import { createRateLimiter, handleRateLimitError } from "@/lib/rate-limit";
 import { cookies } from "next/headers";
@@ -9,17 +9,7 @@ type SteamReviewResponse = {
   query_summary: {
     num_reviews: number;
     review_score: number;
-    review_score_desc:
-      | "Very Positive"
-      | "Mixed"
-      | "Mostly Positive"
-      | "Positive"
-      | "Very Negative"
-      | "Negative"
-      | "Overwhelmingly Positive"
-      | "Overwhelmingly Negative"
-      | "Mostly Negative"
-      | "Mixed";
+    review_score_desc: string;
     total_positive: number;
     total_negative: number;
     total_reviews: number;

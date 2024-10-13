@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getReviewsAction } from "./_actions/get-reviews";
+import AddToFavoritesButton from "./add-to-favorites-button";
 
 export default async function GameDetail({
   params: { appId },
@@ -30,13 +31,18 @@ export default async function GameDetail({
       ))}
 
       {isAnyReviewWithZeroPlaytime ? (
-        <p className="text-slate-700 text-sm mt-8">
+        <p className="text-slate-700 text-sm my-8">
           *Some games on Steam don&apos;t track playtime because the game is run
           through an external launcher.
         </p>
       ) : null}
 
-      <Link href="/" className="mt-4 font-bold text-slate-500">
+      <AddToFavoritesButton appId={Number(appId)} />
+
+      <Link
+        href="/"
+        className="mt-4 font-bold text-slate-500 hover:text-slate-700"
+      >
         BACK
       </Link>
     </main>

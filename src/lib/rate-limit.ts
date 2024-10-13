@@ -13,8 +13,14 @@ export const createRateLimiter = (options?: {
   return new RateLimiterMemory(rateLimitOptions);
 };
 
+export class RateLimitError extends Error {
+  constructor() {
+    super("Rate limit exceeded");
+  }
+}
+
 export const handleRateLimitError = (error: unknown) => {
   if (error instanceof RateLimiterRes && error.remainingPoints === 0) {
-    throw new Error("Rate limit exceeded");
+    throw new RateLimitError();
   }
 };

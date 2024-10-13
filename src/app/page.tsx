@@ -1,4 +1,4 @@
-import { SearchCommandBox } from "./search-command-box";
+import { SearchCommandBox } from "./_components/search-command-box";
 
 export default function Home() {
   return (
